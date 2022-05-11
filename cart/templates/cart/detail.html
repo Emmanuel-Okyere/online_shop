@@ -48,13 +48,15 @@ method="post">
 <tr class="total">
 <td>Total</td>
 <td colspan="4"></td>
-<td class="num">GH₵{{ cart.get_total_price }}</td>
+<td class="num">GH₵{{ cart.get_total }}</td>
 </tr>
 </tbody>
 </table>
 <p class="text-right">
 <a href="{% url 'shop:product_list' %}" class="button
 light">Continue shopping</a>
-<a href="#" class="button">Checkout</a>
+<a href="{% url 'orders:order_create' %}" class="button">
+Checkout
+</a>
 </p>
 {% endblock %}
