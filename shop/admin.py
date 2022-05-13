@@ -3,20 +3,17 @@ from django.contrib import admin
 from .models import Category, Product
 # Register your models here.
 
+
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     """Category admin"""
-    list_display = ("name","slug",)
-    list_filter = ("name",)
+    list_display = ("name", "slug",)
     search_fields = ("name",)
-    prepopulated_fields = {"slug":("name",)}
 
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     """Product admin"""
-    list_display = ("category","name","image","price","available",)
-    list_filter = ("category",)
+    list_display = ("category", "name", "image", "price", "available",)
     search_fields = ("name",)
-    list_editable = ['price', 'available','image']
-    prepopulated_fields = {"slug":("name",)}
+    list_editable = ['price', 'available', 'image']
