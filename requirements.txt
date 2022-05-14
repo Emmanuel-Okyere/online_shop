@@ -17,9 +17,9 @@ colorama==0.4.4
 cssselect2==0.6.0
 defusedxml==0.7.1
 Django==4.0.4
-django-parler==2.0.1
 django-rosetta==0.9.8
 django-sslserver==0.22
+django-weasyprint==2.1.0
 flower==1.0.0
 fonttools==4.33.3
 html5lib==1.1

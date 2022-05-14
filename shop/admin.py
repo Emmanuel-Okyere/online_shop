@@ -1,6 +1,7 @@
 """Django admin model"""
 from django.contrib import admin
 from .models import Category, Product
+
 # Register your models here.
 
 
@@ -16,4 +17,4 @@ class ProductAdmin(admin.ModelAdmin):
     """Product admin"""
     list_display = ("category", "name", "image", "price", "available",)
     search_fields = ("name",)
-    list_editable = ['price', 'available', 'image']
+    list_editable = ['price', 'available', 'image', "name"]

@@ -35,6 +35,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["mysite.com", "127.0.0.1"]
 
+REDIS_HOST = 'localhost'
+REDIS_PORT = 6379
+REDIS_DB = 1
 
 # Braintree Configuration
 BRAINTREE_CONF = braintree.Configuration(
