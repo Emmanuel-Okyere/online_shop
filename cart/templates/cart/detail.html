@@ -1,17 +1,18 @@
 {% extends "shop/base.html" %}
+{% load i18n %}
 {% load static %}
-{% block title %}Your shopping cart{% endblock %}
+{% block title %}{% trans "Your shopping cart" %}{% endblock %}
 {% block content %}
-<h1>Your shopping cart</h1>
+<h1>{% trans "Your shopping cart" %}</h1>
 <table class="cart">
 <thead>
 <tr>
-<th>Image</th>
-<th>Product</th>
-<th>Quantity</th>
-<th>Remove</th>
-<th>Unit price</th>
-<th>Price</th>
+<th>{% trans 'Image' %}</th>
+<th>{% trans "Product" %}</th>
+<th>{% trans "Quantity" %}</th>
+<th>{% trans "Remove" %}</th>
+<th>{% trans "Unit price" %}</th>
+<th>{% trans "Price" %}</th>
 </tr>
 </thead>
 <tbody>
@@ -36,7 +37,7 @@
 <td>
 <form action="{% url 'cart:cart_remove' product.id %}"
 method="post">
-<input type="submit" value="Remove">
+<input type="submit" value="{% trans 'Remove' %}">
 {% csrf_token %}
 </form>
 </td>
@@ -45,16 +46,41 @@ method="post">
 </tr>
 {% endwith %}
 {% endfor %}
-<tr class="total">
-<td>Total</td>
+{% if cart.coupon %}
+<tr class="subtotal">
+<td>{% trans "Subtotal" %}</td>
 <td colspan="4"></td>
-<td class="num">GH₵{{ cart.get_total }}</td>
+<td class="num">GH₵{{ cart.get_total|floatformat:2 }}</td>
 </tr>
+<tr>
+<td>
+"{{ cart.coupon.code }}" {% trans "coupon" %}
+({{ cart.coupon.discount }}% {% trans "off" %})
+</td>
+<td colspan="4"></td>
+<td class="num neg">
+- GH₵{{ cart.get_discount|floatformat:2 }}
+</td>
+</tr>
+<tr class="total">
+<td>{% trans "Total" %}</td>
+<td colspan="4"></td>
+<td class="num">
+GH₵{{ cart.get_total_price_after_discount|floatformat:2 }}
+</td>
+</tr>
+{% endif %}
 </tbody>
 </table>
+<p>{% trans "Apply a coupon" %}:</p>
+<form action="{% url 'coupons:apply' %}" method="post">
+{{ coupon_apply_form }}
+<input type="submit" value="{% trans 'Apply' %}">
+{% csrf_token %}
+</form>
 <p class="text-right">
 <a href="{% url 'shop:product_list' %}" class="button
-light">Continue shopping</a>
+light">{% trans "Continue shopping" %}</a>
 <a href="{% url 'orders:order_create' %}" class="button">
 Checkout
 </a>
